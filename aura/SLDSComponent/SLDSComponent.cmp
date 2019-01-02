@@ -1,0 +1,97 @@
+<aura:component >
+    
+    <div class="demo-container">
+        <div class="slds-size--1-of-1">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center">.slds-size--1-of-1</div>
+        </div>
+        <div class="slds-size--1-of-2">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--1-of-2</div>
+        </div>
+        <div class="slds-size--1-of-3">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--1-of-3</div>
+        </div>
+        <div class="slds-size--2-of-3">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--2-of-3</div>
+        </div>
+        <div class="slds-size--1-of-4">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--1-of-4</div>
+        </div>
+        <div class="slds-size--2-of-4">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--2-of-4</div>
+        </div>
+        <div class="slds-size--3-of-4">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--3-of-4</div>
+        </div>
+        <div class="slds-size--1-of-5">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--1-of-5</div>
+        </div>
+        <div class="slds-size--2-of-5">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--2-of-5</div>
+        </div>
+        <div class="slds-size--3-of-5">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--3-of-5</div>
+        </div>
+        <div class="slds-size--4-of-5">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--4-of-5</div>
+        </div>
+        <div class="slds-size--1-of-6">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--1-of-6</div>
+        </div>
+        <div class="slds-size--2-of-6">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--2-of-6</div>
+        </div>
+        <div class="slds-size--3-of-6">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--3-of-6</div>
+        </div>
+        <div class="slds-size--4-of-6">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--4-of-6</div>
+        </div>
+        <div class="slds-size--5-of-6">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--5-of-6</div>
+        </div>
+        <div class="slds-size--1-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--1-of-12</div>
+        </div>
+        <div class="slds-size--2-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--2-of-12</div>
+        </div>
+        <div class="slds-size--3-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--3-of-12</div>
+        </div>
+        <div class="slds-size--4-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--4-of-12</div>
+        </div>
+        <div class="slds-size--5-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--5-of-12</div>
+        </div>
+        <div class="slds-size--6-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--6-of-12</div>
+        </div>
+        <div class="slds-size--7-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--7-of-12</div>
+        </div>
+        <div class="slds-size--8-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--8-of-12</div>
+        </div>
+        <div class="slds-size--9-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--9-of-12</div>
+        </div>
+        <div class="slds-size--10-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--10-of-12</div>
+        </div>
+        <div class="slds-size--11-of-12">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center slds-m-top--medium">.slds-size--11-of-12</div>
+        </div>
+    </div>
+
+    <div class="demo-container" style="height:100px;"></div>
+
+    <div class="demo-container slds-size--1-of-2" style="background-color: red;">
+        <div class="slds-size--1-of-2">
+            <div class="slds-box slds-box--x-small slds-theme--shade slds-text-align--center">.slds-size--1-of-2 in div with width:50%;</div>
+        </div>
+    </div>
+
+    <div class="demo-container" style="height:100px;"></div>
+
+</aura:component>

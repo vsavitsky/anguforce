@@ -1,0 +1,55 @@
+<aura:component controller="ContactController" >
+    <aura:attribute name="MyStringVariable" type="String" default="My default value" />
+    <aura:attribute name="mydata" type="Contact[]" />
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="nameForSearch" type="String" />
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <aura:registerEvent name="TestEvent" type="c:TestEvent"/>
+
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-account" title="account">
+                        <lightning:icon iconName="standard:account" size="large" />
+                        <span class="slds-assistive-text">account</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <a href="javascript:void(0);" class="slds-truncate" title="Accounts">
+                            <span class="slds-text-heading_small">{!v.MyStringVariable}</span>
+                        </a>
+                    </h2>
+                </div>
+                <div class="slds-no-flex">
+                    <lightning:button label="New" onclick="{!c.handleNewClick}"/>
+                    <lightning:button label="Cancel" onclick="{!c.handleCancelClick}"/>
+                    <lightning:button label="Close" onclick="{!c.handleCloseClick}"/>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">Anything can go in the Card Body</div>
+
+        <div class="examples-block">
+
+            <!-- Search by Name -->
+            <lightning:input name="input" label="Search by Name" value="{!v.nameForSearch}" />
+            <br/>
+            <lightning:button label="Search" title="Search action" onclick="{! c.searchByName }"/>
+
+            <lightning:button label="Update" title="Update action" onclick="{! c.updateContact }"/>
+            <!-- Search by Name -->
+            <lightning:button label="Run Event" title="Run Event" onclick="{! c.runEvent }"/>
+
+        </div>
+
+        <footer class="slds-card__footer">
+            <lightning:datatable data="{! v.mydata }"
+                                 columns="{! v.mycolumns }"
+                                 keyField="Id"
+                                 hideCheckboxColumn="true"/>
+        </footer>
+    </article>
+</aura:component>

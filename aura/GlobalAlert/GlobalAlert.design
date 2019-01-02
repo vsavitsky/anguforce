@@ -1,0 +1,4 @@
+<design:component >
+    <design:attribute name="title" label="Alert Title" description="Alert Title Description" />
+    <design:attribute name="content" label="Alert Content" description="Alert Content Description" />
+</design:component>

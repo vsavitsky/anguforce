@@ -1,0 +1,94 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes">
+    <!--ltng:require styles="/resource/SLDS222/assets/styles/salesforce-lightning-design-system.css" /-->
+    
+    <aura:attribute name="townConsumption" type="integer" default="8" />
+    <aura:attribute name="highwayConsumption" type="integer" default="6" />
+    <aura:attribute name="fuelPrice" type="double" default="1.11" />
+    
+    <aura:attribute name="townDistance" type="integer" default="1" />
+    <aura:attribute name="highwayDistance" type="integer" default="1" />
+    
+    <aura:attribute name="litersRequired" type="double" />
+    <aura:attribute name="routePrice" type="double" />
+    
+    <aura:handler name="change" value="{!v.townConsumption}" action="{!c.calculateRoute}" />
+    <aura:handler name="change" value="{!v.highwayConsumption}" action="{!c.calculateRoute}" />
+    <aura:handler name="change" value="{!v.fuelPrice}" action="{!c.calculateRoute}" />
+    <aura:handler name="change" value="{!v.townDistance}" action="{!c.calculateRoute}" />
+    <aura:handler name="change" value="{!v.highwayDistance}" action="{!c.calculateRoute}" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.calculateRoute}" />
+    
+    <div>
+        
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                    
+                    <div class="slds-media__body">
+                        <h2>
+                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                                <span class="slds-text-heading--small">Fuel Calculator</span>
+                            </a>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <br/>
+            
+            <div class="slds-has-divider--bottom"></div>
+            <h3 class="slds-text-heading--small slds-m-bottom--medium">Parameters</h3>
+            <div class="slds-card__body">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" >Town Consumption (liters/100km):</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputNumber class="slds-input" value="{!v.townConsumption}" />
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" >Highway Consumption (liters/100km)::</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputNumber class="slds-input" value="{!v.highwayConsumption}" />
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" >Fuel price:</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputNumber class="slds-input" value="{!v.fuelPrice}" />
+                    </div>
+                </div>
+                <br/>
+                <div class="slds-has-divider--bottom"></div>
+                
+                <h3 class="slds-text-heading--small slds-m-bottom--medium">Planned distance</h3>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" >Town distance:</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputNumber class="slds-input" value="{!v.townDistance}" />
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" >Highway distance:</label>
+                    <div class="slds-form-element__control">
+                        <ui:inputNumber class="slds-input" value="{!v.highwayDistance}" />
+                    </div>
+                </div>
+                
+                <button class="slds-button--neutral" onclick="{!c.calculateRoute}">Calculate</button>
+                <button class="slds-button--neutral" onclick="{!c.setDefaults}">Default</button>
+                
+                <div class="slds-has-divider--bottom"></div>
+                <div class="result-section">
+                    <h3 class="slds-text-heading--small slds-m-bottom--medium">Results</h3>
+                    <h2>Liters required: <span class="result-text">{!v.litersRequired}</span> </h2>
+                    <br/>
+                    <h2>Route price: <span class="result-text">{!v.routePrice}</span> </h2>
+                </div>
+            </div>
+            
+        </article>
+       
+    </div>
+    
+    
+</aura:component>

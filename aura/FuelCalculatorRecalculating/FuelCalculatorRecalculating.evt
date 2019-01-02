@@ -1,0 +1,11 @@
+<aura:event type="APPLICATION" description="Event template">
+	<aura:attribute name="townConsumption" type="integer" />
+    <aura:attribute name="highwayConsumption" type="integer" />
+    <aura:attribute name="fuelPrice" type="double" />
+    
+    <aura:attribute name="townDistance" type="integer" />
+    <aura:attribute name="highwayDistance" type="integer" />
+    
+    <aura:attribute name="litersRequired" type="double" />
+    <aura:attribute name="routePrice" type="double" />
+</aura:event>

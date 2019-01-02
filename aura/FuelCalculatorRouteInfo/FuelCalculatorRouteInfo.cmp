@@ -1,0 +1,91 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes">
+    
+    <aura:attribute name="townConsumption" type="integer" />
+    <aura:attribute name="highwayConsumption" type="integer" />
+    <aura:attribute name="fuelPrice" type="double" />
+    
+    <aura:attribute name="townDistance" type="double" />
+    <aura:attribute name="highwayDistance" type="double" />
+    
+    <aura:attribute name="litersRequired" type="double" />
+    <aura:attribute name="routePrice" type="double" />
+    <aura:attribute name="townLitersRequired" type="double" />
+    <aura:attribute name="highwayLitersRequired" type="double" />
+    <aura:attribute name="townPrice" type="double" />
+    <aura:attribute name="highwayPrice" type="double" />
+    
+    <aura:attribute name="distancePersentage" type="String" />
+    <aura:attribute name="fuelPersentage" type="String" />
+    <aura:attribute name="pricePersentage" type="String" />
+    
+    <aura:handler event="c:FuelCalculatorRecalculating" action="{!c.refreshInfo}" />
+    
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                
+                <div class="slds-media__body">
+                    <h1>
+                        <a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+                            <span class="slds-text-heading--small">Route Info</span>
+                        </a>
+                    </h1>
+                </div>
+            </header>
+            
+        </div>
+        <div class="slds-card__body">
+            <div class="info-string">
+                <h3 class="left-value">Town</h3>
+                <h3 class="center-value">Zone</h3>
+                <h3 class="right-value">Highway</h3>
+            </div>
+            
+            
+            
+            <div class="info-string">
+                <h3 class="left-value">{!v.townDistance}</h3>
+                <h3 class="center-value">Distance (km)</h3>
+                <h3 class="right-value">{!v.highwayDistance}</h3>
+            </div>
+            <div class="slds-progress">
+                <div class="slds-progress-bar">
+                    <span class="slds-progress-bar__value" style="{!'width:' + v.distancePersentage + '%'}">
+                        <span class="slds-assistive-text">Progress: {!v.distancePersentage}%</span>
+                    </span>
+                </div>
+            </div>
+            <div class="info-string">
+                <h3 class="left-value">{!v.townLitersRequired}</h3>
+                <h3 class="center-value">Fuel (liters)</h3>
+                <h3 class="right-value">{!v.highwayLitersRequired}</h3>
+            </div>
+            <div class="slds-progress">
+                <div class="slds-progress-bar">
+                    <span class="slds-progress-bar__value" style="{!'width:' + v.fuelPersentage + '%'}">
+                        <span class="slds-assistive-text">Progress: {!v.fuelPersentage}%</span>
+                    </span>
+                </div>
+            </div>
+            <div class="info-string">
+                <h3 class="left-value">{!v.townPrice}</h3>
+                <h3 class="center-value">Price</h3>
+                <h3 class="right-value">{!v.highwayPrice}</h3>
+            </div>
+            <div class="slds-progress">
+                <div class="slds-progress-bar">
+                    <span class="slds-progress-bar__value" style="{!'width:' + v.pricePersentage + '%'}">
+                        <span class="slds-assistive-text">Progress: {!v.pricePersentage}%</span>
+                    </span>
+                </div>
+            </div>
+            <div class="result-section">
+                <h3 class="slds-text-heading--small slds-m-bottom--medium">Results</h3>
+                <h2>Liters required: <span class="result-text">{!v.litersRequired}</span> </h2>
+                <br/>
+                <h2>Route price: <span class="result-text">{!v.routePrice}</span> </h2>
+            </div>
+        </div>
+        
+    </article>
+</aura:component>

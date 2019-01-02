@@ -1,0 +1,26 @@
+.THIS {
+    width: 300px;
+    margin: 30px;
+}
+
+.THIS .info-string {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.THIS .center-value {
+    float: center;
+    color: red;
+}
+
+.THIS .result-section {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #D6D6D6;
+}
+
+.THIS .result-section .result-text {
+    color: #00C700;
+    font-size: 15px;
+}

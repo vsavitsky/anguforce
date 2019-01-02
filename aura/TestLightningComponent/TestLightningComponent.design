@@ -1,0 +1,5 @@
+<design:component >
+    <design:attribute name="firstValue" label="First Value" description="Test description for first value" />
+    <design:attribute name="secondValue" label="Second Value" description="Test description for second value" />
+    <design:attribute name="thirdValue" label="Third Value" description="Test description for third value" />
+</design:component>

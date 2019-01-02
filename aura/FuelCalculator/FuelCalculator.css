@@ -1,0 +1,19 @@
+.THIS {
+    padding: 30px;
+}
+
+.THIS button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px
+}
+
+.THIS .slds-card {
+    padding: 10px;
+    width: 300px;
+}
+
+.THIS .result-section .result-text {
+    color: #00C700;
+    font-size: 15px;
+}

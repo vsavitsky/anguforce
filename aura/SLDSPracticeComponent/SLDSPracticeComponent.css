@@ -1,0 +1,47 @@
+.THIS.demo-container {
+    background-color: #42a1f4;
+}
+.THIS .my-block {
+    background-color: #42a1f4;
+    display: inline-grid;
+}
+.THIS .demo-content {
+    margin: 15px;
+    max-height: 600px;
+}
+
+.THIS .has-scroll {
+    overflow-y: scroll;
+}
+
+.THIS .has-courier-font {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.THIS .my-special-show {
+    display: none;
+}
+
+@media (min-width: 1050px)  {
+    .THIS .my-special-show {
+        display: inline-grid;
+        width: 100%;
+        background-color: green;
+    }
+}
+
+.THIS .my-special-hide {
+    display: inline-grid;
+    width: 100%;
+    background-color: yellow;
+}
+
+@media (min-width: 1050px)  {
+    .THIS .my-special-hide {
+         display: none;
+    }
+}
+
+.THIS h1 {
+    font-size: 24px;
+}
