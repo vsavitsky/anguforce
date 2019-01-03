@@ -1,38 +1,51 @@
 public with sharing class Home_Angular_Controller {
 
 	public String data {get; set;}
+	public SummaryInfo summaryInfo {get; set;}
 
 	public Home_Angular_Controller() {
 	
-		List<Data> dataSet = new List<Data>();
+		Data dataObj = new Data();
+		List<ProjectInfo> projectsInfo = new List<ProjectInfo>();
+		SummaryInfo summaryInfo = new SummaryInfo();
+		summaryInfo.summaryDays = 0;
+		summaryInfo.projectsCount = 0;
 
 		for (test1_pckg__Project_participation__c projPart : [SELECT Id, test1_pckg__Title__c, test1_pckg__Participation_Start_Date__c, test1_pckg__Participation_End_Date__c, test1_pckg__Participated_days__c, test1_pckg__Is_Active_Project__c, test1_pckg__Description__c FROM test1_pckg__Project_participation__c ORDER BY test1_pckg__Participation_Start_Date__c]) {
 
-			Data obj = new Data();
-			obj.projectTitle = projPart.test1_pckg__Title__c;
+			ProjectInfo projectInfo = new ProjectInfo();
+			projectInfo.projectTitle = projPart.test1_pckg__Title__c;
 			
 			if (projPart.test1_pckg__Participation_Start_Date__c != null) {
 				Datetime participationStartDate = projPart.test1_pckg__Participation_Start_Date__c;
-				obj.participationStartDate = participationStartDate.format('dd-MM-yyyy');
+				projectInfo.participationStartDate = participationStartDate.format('dd-MM-yyyy');
 			} else {
-				obj.participationStartDate = '';
+				projectInfo.participationStartDate = '';
 			}
 
 			if (projPart.test1_pckg__Participation_End_Date__c != null) {
 				Datetime participationEndDate = projPart.test1_pckg__Participation_End_Date__c;
-				obj.participationEndDate = participationEndDate.format('dd-MM-yyyy');
+				projectInfo.participationEndDate = participationEndDate.format('dd-MM-yyyy');
 			} else {
-				obj.participationEndDate = 'Is Active >>>';
+				projectInfo.participationEndDate = 'Is Active >>>';
 			}
 
-			obj.participatedDays = projPart.test1_pckg__Participated_days__c;
-			obj.participatedPeriod = getParticipatedPeriod(obj.participatedDays);
-			obj.isActiveProject = projPart.test1_pckg__Is_Active_Project__c;
-			//obj.description = projPart.test1_pckg__Description__c;
-			dataSet.add(obj);
+			projectInfo.participatedDays = projPart.test1_pckg__Participated_days__c;
+			projectInfo.participatedPeriod = getParticipatedPeriod(projectInfo.participatedDays);
+			projectInfo.isActiveProject = projPart.test1_pckg__Is_Active_Project__c;
+			//projectInfo.description = projPart.test1_pckg__Description__c;
+
+			summaryInfo.summaryDays += (Integer)projPart.test1_pckg__Participated_days__c;
+			summaryInfo.projectsCount++;
+
+			projectsInfo.add(projectInfo);
 		}
 
-		data = JSON.serialize(dataSet);
+		dataObj.projectsInfo = projectsInfo;
+		summaryInfo.summaryPeriod = getParticipatedPeriod(summaryInfo.summaryDays);
+		dataObj.summaryInfo = summaryInfo;
+
+		data = JSON.serialize(dataObj);
 	}
 
 	private String getParticipatedPeriod (Decimal participatedDays) {
@@ -59,7 +72,7 @@ public with sharing class Home_Angular_Controller {
 		return result;
 	}
 
-	public class Data {
+	public class ProjectInfo {
 		public String projectTitle {get;set;}
 		public String participationStartDate {get;set;}
 		public String participationEndDate {get;set;}
@@ -67,5 +80,16 @@ public with sharing class Home_Angular_Controller {
 		public String participatedPeriod {get;set;}
 		public Boolean isActiveProject {get;set;}
 		//public String description {get;set;}
+	}
+
+	public class SummaryInfo {
+		public Integer projectsCount {get;set;}
+		public Integer summaryDays {get;set;}
+		public String summaryPeriod {get;set;}
+	}
+
+	public class Data {
+		public List<ProjectInfo> projectsInfo {get;set;}
+		public SummaryInfo summaryInfo {get;set;}
 	}
 }
