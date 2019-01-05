@@ -114,7 +114,7 @@
 						class="chart chart-doughnut"
 						chart-data="technologyChartData" 
 						chart-labels="technologyLabels"
-						chart-colors="technologiesColours">
+						chart-colors="technologyChartColors">
 					</canvas> 
 				</div>
 
