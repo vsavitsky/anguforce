@@ -17,21 +17,38 @@
 				$scope.data = JSON.parse('{!data}');
 				$scope.summaryInfo = $scope.data['summaryInfo'];
 
-				console.log('>>> $scope.data: ', JSON.parse('{!data}'));
+				// console.log('>>> $scope.data: ', JSON.parse('{!data}'));
 
-				var labelsList = [];
-				var chartDataList = [];
+				// get projects info
+				var projectLabelsList = [];
+				var projectChartDataList = [];
 				var projectsList = {!data}.projectsInfo;
 
 				for (var i = 0; i < projectsList.length; i++) {
 					var obj = projectsList[i];
 					
-					labelsList.push(obj['projectTitle']);
-					chartDataList.push(obj['participatedDays']);
+					projectLabelsList.push(obj['projectTitle']);
+					projectChartDataList.push(obj['participatedDays']);
 				}
-				
-				$scope.labels = labelsList;
-				$scope.chartData = chartDataList;
+				$scope.projectLabels = projectLabelsList;
+				$scope.projectChartData = projectChartDataList;
+
+				// get technologies info
+				var technologyLabelsList = [];
+				var technologyChartDataList = [];
+				var technologyChartColorsList = [];
+				var technologiesList = {!data}.technologiesInfo;
+
+				for (var i = 0; i < technologiesList.length; i++) {
+					var obj = technologiesList[i];
+					
+					technologyLabelsList.push(obj['title']);
+					technologyChartDataList.push(obj['summaryDays']);
+					technologyChartColorsList.push(obj['color']);
+				}
+				$scope.technologyLabels = technologyLabelsList;
+				$scope.technologyChartData = technologyChartDataList;
+				$scope.technologyChartColors = technologyChartColorsList;
 			});
 		</script>
 
@@ -68,17 +85,37 @@
 					<hr class="my-4" />
 
 					<div class="jumbotron">
-  						<h4 class="lead">Project chart</h4>
+  						<h4 class="lead">Projects</h4>
   					</div>
 
 					<div class="panel panel-default">
 						<canvas id="bar" 
 							class="chart chart-bar"
-							chart-data="chartData" 
-							chart-labels="labels" 
-							chart-series="series">
+							chart-data="projectChartData" 
+							chart-labels="projectLabels">
 						</canvas>
 					</div>
+					<hr class="my-4" />
+
+					<div class="jumbotron">
+  						<h4 class="lead">Technologies</h4>
+  						<hr class="my-4" />
+  						<div ng-repeat="techInfo in data.technologiesInfo">
+  							<p>
+  								<h4 class="lead">
+  									<span style="background-color: {{techInfo.color}}">{{techInfo.title}}:</span> 
+  									{{techInfo.summaryPeriod}}
+  								</h4>
+  							</p>
+  						</div>
+  					</div>
+
+					<canvas id="doughnut" 
+						class="chart chart-doughnut"
+						chart-data="technologyChartData" 
+						chart-labels="technologyLabels"
+						chart-colors="technologiesColours">
+					</canvas> 
 				</div>
 
 			</div>

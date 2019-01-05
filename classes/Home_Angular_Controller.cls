@@ -7,48 +7,88 @@ public with sharing class Home_Angular_Controller {
 	
 		Data dataObj = new Data();
 		List<ProjectInfo> projectsInfo = new List<ProjectInfo>();
+		List<TechnologyInfo> technologiesInfo = new List<TechnologyInfo>();
 		SummaryInfo summaryInfo = new SummaryInfo();
 		summaryInfo.summaryDays = 0;
 		summaryInfo.projectsCount = 0;
+		Map<String, TechnologyInfo> daysPerTechnologyMap = new Map<String, TechnologyInfo>();
 
-		for (test1_pckg__Project_participation__c projPart : [SELECT Id, test1_pckg__Title__c, test1_pckg__Participation_Start_Date__c, test1_pckg__Participation_End_Date__c, test1_pckg__Participated_days__c, test1_pckg__Is_Active_Project__c, test1_pckg__Description__c FROM test1_pckg__Project_participation__c ORDER BY test1_pckg__Participation_Start_Date__c]) {
+		List<test1_pckg__Project_Technology__c> projectTechnologies = [
+				SELECT Id, 
+				test1_pckg__Project_participation__r.test1_pckg__Title__c,
+				test1_pckg__Project_participation__r.test1_pckg__Participation_Start_Date__c,
+				test1_pckg__Project_participation__r.test1_pckg__Participation_End_Date__c,
+				test1_pckg__Project_participation__r.test1_pckg__Participated_days__c,
+				test1_pckg__Project_participation__r.test1_pckg__Is_Active_Project__c,
+				test1_pckg__Technology__r.Id,
+				test1_pckg__Technology__r.test1_pckg__Title__c,
+				test1_pckg__Technology__r.test1_pckg__Hex_Color__c
+				FROM test1_pckg__Project_Technology__c
+				ORDER BY test1_pckg__Project_participation__r.test1_pckg__Participation_Start_Date__c
+		];
+
+		Set<String> savedProjects = new Set<String>();
+
+		for (test1_pckg__Project_Technology__c projectTechnology : projectTechnologies) {
 
 			ProjectInfo projectInfo = new ProjectInfo();
-			projectInfo.projectTitle = projPart.test1_pckg__Title__c;
+			projectInfo.projectTitle = projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Title__c;			
 			
-			if (projPart.test1_pckg__Participation_Start_Date__c != null) {
-				Datetime participationStartDate = projPart.test1_pckg__Participation_Start_Date__c;
+			if (projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Participation_Start_Date__c != null) {
+				Datetime participationStartDate = projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Participation_Start_Date__c;
 				projectInfo.participationStartDate = participationStartDate.format('dd-MM-yyyy');
 			} else {
 				projectInfo.participationStartDate = '';
 			}
 
-			if (projPart.test1_pckg__Participation_End_Date__c != null) {
-				Datetime participationEndDate = projPart.test1_pckg__Participation_End_Date__c;
+			if (projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Participation_End_Date__c != null) {
+				Datetime participationEndDate = projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Participation_End_Date__c;
 				projectInfo.participationEndDate = participationEndDate.format('dd-MM-yyyy');
 			} else {
 				projectInfo.participationEndDate = 'Is Active >>>';
 			}
 
-			projectInfo.participatedDays = projPart.test1_pckg__Participated_days__c;
-			projectInfo.participatedPeriod = getParticipatedPeriod(projectInfo.participatedDays);
-			projectInfo.isActiveProject = projPart.test1_pckg__Is_Active_Project__c;
-			//projectInfo.description = projPart.test1_pckg__Description__c;
+			projectInfo.participatedDays = projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Participated_days__c;
+			projectInfo.participatedPeriod = getPeriodString(projectInfo.participatedDays);
+			projectInfo.isActiveProject = projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Is_Active_Project__c;
+			//projectInfo.description = projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Description__c;
 
-			summaryInfo.summaryDays += (Integer)projPart.test1_pckg__Participated_days__c;
-			summaryInfo.projectsCount++;
+			Decimal temp = 0;
+			if (daysPerTechnologyMap.containsKey(projectTechnology.test1_pckg__Technology__r.test1_pckg__Title__c)) {
+				temp = daysPerTechnologyMap.get(projectTechnology.test1_pckg__Technology__r.test1_pckg__Title__c).summaryDays;
+			}
+			TechnologyInfo tempTech = new TechnologyInfo();
+			tempTech.title = projectTechnology.test1_pckg__Technology__r.test1_pckg__Title__c;
+			tempTech.color = projectTechnology.test1_pckg__Technology__r.test1_pckg__Hex_Color__c;
+			tempTech.summaryDays = (Integer)(temp + projectInfo.participatedDays);
+			tempTech.summaryPeriod = getPeriodString(tempTech.summaryDays);
+			daysPerTechnologyMap.put(projectTechnology.test1_pckg__Technology__r.test1_pckg__Title__c, tempTech);
 
-			projectsInfo.add(projectInfo);
+			// continue if Project is already saved
+			if (savedProjects.contains(projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Title__c)) {
+				continue;
+			} else {
+				summaryInfo.summaryDays += (Integer)projectTechnology.test1_pckg__Project_participation__r.test1_pckg__Participated_days__c;
+				summaryInfo.projectsCount++;
+				projectsInfo.add(projectInfo);
+				savedProjects.add(projectInfo.projectTitle);
+			}
+		}			
+
+		for (String key : daysPerTechnologyMap.keySet()) {
+
+			technologiesInfo.add(daysPerTechnologyMap.get(key));
 		}
 
 		dataObj.projectsInfo = projectsInfo;
-		summaryInfo.summaryPeriod = getParticipatedPeriod(summaryInfo.summaryDays);
+		dataObj.technologiesInfo = technologiesInfo;
+		summaryInfo.summaryPeriod = getPeriodString(summaryInfo.summaryDays);
 		dataObj.summaryInfo = summaryInfo;
 
 		data = JSON.serialize(dataObj);
 	}
 
-	private String getParticipatedPeriod (Decimal participatedDays) {
+	private String getPeriodString (Decimal participatedDays) {
 		Integer years = 0;
 		Integer month = 0;
 		String result = '';
@@ -88,8 +128,16 @@ public with sharing class Home_Angular_Controller {
 		public String summaryPeriod {get;set;}
 	}
 
+	public class TechnologyInfo {
+		public String title {get;set;}
+		public String color {get;set;}
+		public Integer summaryDays {get;set;}
+		public String summaryPeriod {get;set;}
+	}
+
 	public class Data {
 		public List<ProjectInfo> projectsInfo {get;set;}
 		public SummaryInfo summaryInfo {get;set;}
+		public List<TechnologyInfo> technologiesInfo {get;set;}
 	}
 }
