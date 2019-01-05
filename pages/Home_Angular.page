@@ -61,10 +61,22 @@
 				<div class="col">
 
 					<div class="jumbotron">
-  						<p><h4 class="lead">Participation in projects</h4></p>
+  						<p><h4 class="display-4">Participation in projects</h4></p>
   						<hr class="my-4" />
-  						<p><h4 class="lead">Attended summary: {{summaryInfo.projectsCount}} projects</h4></p>
-  						<p><h4 class="lead">Experience: {{summaryInfo.summaryPeriod}}</h4></p>
+  						<p>
+  							<h4 class="lead">
+  								<span style="font-weight:bold;">Attended summary:</span>
+  								{{summaryInfo.projectsCount}} projects
+  							</h4>
+  						</p>
+  						<p>
+  							<h4 class="lead">
+  								<span style="font-weight:bold;">
+	  								Experience:
+	  							</span> 
+  								{{summaryInfo.summaryPeriod}}
+  							</h4>
+  						</p>
   						<hr class="my-4" />
   					</div>
 					
@@ -85,7 +97,7 @@
 					<hr class="my-4" />
 
 					<div class="jumbotron">
-  						<h4 class="lead">Projects</h4>
+  						<h4 class="display-4">Projects</h4>
   					</div>
 
 					<div class="panel panel-default">
@@ -98,12 +110,12 @@
 					<hr class="my-4" />
 
 					<div class="jumbotron">
-  						<h4 class="lead">Technologies</h4>
+  						<h3 class="display-4">Technologies</h3>
   						<hr class="my-4" />
   						<div ng-repeat="techInfo in data.technologiesInfo">
   							<p>
   								<h4 class="lead">
-  									<span style="background-color: {{techInfo.color}}">{{techInfo.title}}:</span> 
+  									<span style="background-color:{{techInfo.color}}; font-weight:bold;">{{techInfo.title}}:</span> 
   									{{techInfo.summaryPeriod}}
   								</h4>
   							</p>
@@ -116,6 +128,7 @@
 						chart-labels="technologyLabels"
 						chart-colors="technologyChartColors">
 					</canvas> 
+					<hr class="my-4" />
 				</div>
 
 			</div>
